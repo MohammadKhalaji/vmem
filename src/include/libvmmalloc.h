@@ -115,31 +115,31 @@ extern "C" {
 
 #endif /* __GNUC__ */
 
-extern void *malloc(size_t size) __ATTR_MALLOC__ __ATTR_ALLOC_SIZE__(1);
+extern void *lvmlc_malloc(size_t size) __ATTR_MALLOC__ __ATTR_ALLOC_SIZE__(1);
 
-extern void *calloc(size_t nmemb, size_t size)
+extern void *lvmlc_calloc(size_t nmemb, size_t size)
 	__ATTR_MALLOC__ __ATTR_ALLOC_SIZE__(1, 2);
 
-extern void *realloc(void *ptr, size_t size) __ATTR_ALLOC_SIZE__(2);
+extern void *lvmlc_realloc(void *ptr, size_t size) __ATTR_ALLOC_SIZE__(2);
 
-extern void free(void *ptr);
+extern void lvmlc_free(void *ptr);
 
-extern void cfree(void *ptr);
+extern void lvmlc_cfree(void *ptr);
 
-extern int posix_memalign(void **memptr, size_t alignment, size_t size)
+extern int lvmlc_posix_memalign(void **memptr, size_t alignment, size_t size)
 	__ATTR_NONNULL__(1);
 
-extern void *memalign(size_t boundary, size_t size)
+extern void *lvmlc_memalign(size_t boundary, size_t size)
 	__ATTR_MALLOC__ __ATTR_ALLOC_ALIGN__(1) __ATTR_ALLOC_SIZE__(2);
 
-extern void *aligned_alloc(size_t alignment, size_t size)
+extern void *lvmlc_aligned_alloc(size_t alignment, size_t size)
 	__ATTR_MALLOC__ __ATTR_ALLOC_ALIGN__(1) __ATTR_ALLOC_SIZE__(2);
 
-extern void *valloc(size_t size) __ATTR_MALLOC__ __ATTR_ALLOC_SIZE__(1);
+extern void *lvmlc_valloc(size_t size) __ATTR_MALLOC__ __ATTR_ALLOC_SIZE__(1);
 
-extern void *pvalloc(size_t size) __ATTR_MALLOC__ __ATTR_ALLOC_SIZE__(1);
+extern void *lvmlc_pvalloc(size_t size) __ATTR_MALLOC__ __ATTR_ALLOC_SIZE__(1);
 
-extern size_t malloc_usable_size(void *ptr);
+extern size_t lvmlc_malloc_usable_size(void *ptr);
 
 #ifdef __cplusplus
 }

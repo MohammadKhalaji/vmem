@@ -110,7 +110,7 @@ static bool Destructed; /* when set - ignore all calls (do not call jemalloc) */
 __ATTR_MALLOC__
 __ATTR_ALLOC_SIZE__(1)
 void *
-malloc(size_t size)
+lvmlc_malloc(size_t size)
 {
 	if (unlikely(Destructed))
 		return NULL;
@@ -130,7 +130,7 @@ malloc(size_t size)
 __ATTR_MALLOC__
 __ATTR_ALLOC_SIZE__(1, 2)
 void *
-calloc(size_t nmemb, size_t size)
+lvmlc_calloc(size_t nmemb, size_t size)
 {
 	if (unlikely(Destructed))
 		return NULL;
@@ -149,7 +149,7 @@ calloc(size_t nmemb, size_t size)
  */
 __ATTR_ALLOC_SIZE__(2)
 void *
-realloc(void *ptr, size_t size)
+lvmlc_realloc(void *ptr, size_t size)
 {
 	if (unlikely(Destructed))
 		return NULL;
@@ -167,7 +167,7 @@ realloc(void *ptr, size_t size)
  * free -- free a block previously allocated by malloc
  */
 void
-free(void *ptr)
+lvmlc_free(void *ptr)
 {
 	if (unlikely(Destructed))
 		return;
@@ -188,7 +188,7 @@ free(void *ptr)
  * XXX Not supported on FreeBSD, but we define it anyway
  */
 void
-cfree(void *ptr)
+lvmlc_cfree(void *ptr)
 {
 	if (unlikely(Destructed))
 		return;
@@ -211,7 +211,7 @@ __ATTR_MALLOC__
 __ATTR_ALLOC_ALIGN__(1)
 __ATTR_ALLOC_SIZE__(2)
 void *
-memalign(size_t boundary, size_t size)
+lvmlc_memalign(size_t boundary, size_t size)
 {
 	if (unlikely(Destructed))
 		return NULL;
@@ -236,7 +236,7 @@ __ATTR_MALLOC__
 __ATTR_ALLOC_ALIGN__(1)
 __ATTR_ALLOC_SIZE__(2)
 void *
-aligned_alloc(size_t alignment, size_t size)
+lvmlc_aligned_alloc(size_t alignment, size_t size)
 {
 	if (unlikely(Destructed))
 		return NULL;
@@ -259,7 +259,7 @@ aligned_alloc(size_t alignment, size_t size)
  */
 __ATTR_NONNULL__(1)
 int
-posix_memalign(void **memptr, size_t alignment, size_t size)
+lvmlc_posix_memalign(void **memptr, size_t alignment, size_t size)
 {
 	if (unlikely(Destructed))
 		return ENOMEM;
@@ -286,7 +286,7 @@ posix_memalign(void **memptr, size_t alignment, size_t size)
 __ATTR_MALLOC__
 __ATTR_ALLOC_SIZE__(1)
 void *
-valloc(size_t size)
+lvmlc_valloc(size_t size)
 {
 	if (unlikely(Destructed))
 		return NULL;
@@ -312,7 +312,7 @@ valloc(size_t size)
 __ATTR_MALLOC__
 __ATTR_ALLOC_SIZE__(1)
 void *
-pvalloc(size_t size)
+lvmlc_pvalloc(size_t size)
 {
 	if (unlikely(Destructed))
 		return NULL;
@@ -332,7 +332,7 @@ pvalloc(size_t size)
  * malloc_usable_size -- get usable size of allocation
  */
 size_t
-malloc_usable_size(void *ptr)
+lvmlc_malloc_usable_size(void *ptr)
 {
 	if (unlikely(Destructed))
 		return 0;
@@ -356,14 +356,14 @@ malloc_usable_size(void *ptr)
  * with RTLD_DEEPBIND flag, all the references to libc's malloc(3) functions
  * will be redirected to libvmmalloc.
  */
-void *(*__MALLOC_HOOK_VOLATILE __malloc_hook) (size_t size,
-	const void *caller) = (void *)malloc;
-void *(*__MALLOC_HOOK_VOLATILE __realloc_hook) (void *ptr, size_t size,
-	const void *caller) = (void *)realloc;
-void (*__MALLOC_HOOK_VOLATILE __free_hook) (void *ptr, const void *caller) =
-	(void *)free;
-void *(*__MALLOC_HOOK_VOLATILE __memalign_hook) (size_t size, size_t alignment,
-	const void *caller) = (void *)memalign;
+// void *(*__MALLOC_HOOK_VOLATILE __malloc_hook) (size_t size,
+// 	const void *caller) = (void *)malloc;
+// void *(*__MALLOC_HOOK_VOLATILE __realloc_hook) (void *ptr, size_t size,
+// 	const void *caller) = (void *)realloc;
+// void (*__MALLOC_HOOK_VOLATILE __free_hook) (void *ptr, const void *caller) =
+// 	(void *)free;
+// void *(*__MALLOC_HOOK_VOLATILE __memalign_hook) (size_t size, size_t alignment,
+// 	const void *caller) = (void *)memalign;
 #endif
 
 /*
